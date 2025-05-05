@@ -1,10 +1,13 @@
 FROM ubuntu:24.04
 
 RUN apt-get -qq update && \
-    apt-get -qq install -y --no-install-recommends apt-transport-https ca-certificates wget && \
-    bash -c "$(wget -O - https://apt.kitware.com/kitware-archive.sh)" && \
+    apt-get -qq install -y --no-install-recommends \
+        apt-transport-https ca-certificates libssl-dev make ninja-build wget && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN bash -c "$(wget -O - https://apt.kitware.com/kitware-archive.sh)" && \
     apt-get -qq update && \
-    apt-get -qq install -y --no-install-recommends cmake make ninja-build && \
+    apt-get -qq install -y --no-install-recommends cmake && \
     rm -rf /var/lib/apt/lists/*
 
 RUN echo "deb http://apt.llvm.org/noble/ llvm-toolchain-noble main" \
