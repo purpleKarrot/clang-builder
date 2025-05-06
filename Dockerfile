@@ -2,7 +2,7 @@ FROM ubuntu:24.04
 
 RUN apt-get -qq update && \
     apt-get -qq install -y --no-install-recommends \
-        apt-transport-https ca-certificates libssl-dev make ninja-build wget && \
+        apt-transport-https ca-certificates git libssl-dev make ninja-build wget && \
     rm -rf /var/lib/apt/lists/*
 
 RUN bash -c "$(wget -O - https://apt.kitware.com/kitware-archive.sh)" && \
